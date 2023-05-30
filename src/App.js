@@ -8,6 +8,7 @@ class App extends Component {
 
     this.state = {
       monsters: [],
+      filteredMonsters: [],
     };
 
     console.log('constructor');
@@ -20,7 +21,7 @@ class App extends Component {
       .then(users =>
         this.setState(
           () => {
-            return { monsters: users };
+            return { monsters: users, filteredMonsters: users };
           },
           () => console.log(this.state)
         )
@@ -31,7 +32,22 @@ class App extends Component {
     console.log('render');
     return (
       <div className="App">
-        {this.state.monsters.map(({ name, id }) => (
+        <input
+          className="Search-Box"
+          type="search"
+          placeholder="search monsters"
+          onChange={event => {
+            const value = event.target.value;
+            console.log(value);
+            const filteredMonsters = this.state.monsters.filter(monster =>
+              monster.name.toLowerCase().includes(value.toLowerCase())
+            );
+            this.setState(() => ({
+              filteredMonsters: filteredMonsters,
+            }));
+          }}
+        />
+        {this.state.filteredMonsters.map(({ name, id }) => (
           <h1 key={id}>{name}</h1>
         ))}
       </div>
