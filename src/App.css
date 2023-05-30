@@ -13,3 +13,10 @@ body {
   );
   text-align: center;
 }
+
+.app-title {
+  color: rgba(255, 255, 255, 1);
+  margin: 24px;
+  font-size: 76px;
+  font-family: 'Caveat', cursive;
+}
